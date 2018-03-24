@@ -16,7 +16,7 @@ function try_sqlsrv() {
 	$cur = sqlsrv_query($conn, 'Select emp_no, emp_nickname from tblemployee where emp_iscurrent=1');
 	
 	while( $obj = sqlsrv_fetch_object( $cur)) {
-		echo $obj->emp_no . ": " . $obj->emp_nicKname . "<br />";
+		echo $obj->emp_no . ": " . $obj->emp_nickname . "<br />";
 	}
 }
 
