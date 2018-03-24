@@ -1,5 +1,5 @@
 <?php 
-echo 'Welcome to the Crowbank Local Listener\n';
+echo 'Welcome to the Crowbank Local Listener<br>';
 
 function try_sqlsrv() {
 	$serverName = "(local)\sqlexpress";
@@ -11,7 +11,7 @@ function try_sqlsrv() {
 	/* Connect using Windows Authentication. */
 	$conn = sqlsrv_connect( $serverName, $connectionOptions);
 	if( $conn === false )
-		die( FormatErrors( sqlsrv_errors() ) );
+		die( print_r( sqlsrv_errors() ) );
 	
 	$cur = sqlsrv_query($conn, 'Select emp_no, emp_nickname from tblemployee where emp_iscurrent=1');
 	
