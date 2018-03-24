@@ -3,12 +3,21 @@ echo 'Welcome to the Crowbank Local Listener\n';
 
 function try_sqlsrv() {
 	$serverName = "(local)\sqlexpress";
-	$connectionOptions = array("Database"=>"crowbank");
+	$connectionOptions = array("Database" => "crowbank",
+			"UID" => "PA",
+			"PWD" => "petadmin"
+	);
 	
 	/* Connect using Windows Authentication. */
 	$conn = sqlsrv_connect( $serverName, $connectionOptions);
 	if( $conn === false )
 		die( FormatErrors( sqlsrv_errors() ) );
+	
+	$cur = sqlsrv_query($conn, 'Select emp_no, emp_nickname from tblemployee where emp_iscurrent=1');
+	
+	while( $obj = sqlsrv_fetch_object( $cur)) {
+		echo $obj->emp_no . ": " . $obj->emp_nicname . "<br />";
+	}
 }
 
 function try_odbc() {
