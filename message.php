@@ -12,6 +12,10 @@ extract($msg);
 
 $conn = connection();
 
+$sql = "{ call plog ('message.php called', 'INFO', 'message.php', 0, '', 'message.php', 15)}";
+		
+sqlsrv_query($conn, $sql);
+
 $sql = "{ call pcreatemessage ( ?, ?, ?, ?, ? )}";
 $params = array (
 		array( $msg_no, SQLSRV_PARAM_IN ),
@@ -51,5 +55,7 @@ $params = array(
 
 sqlsrv_query($conn, $sql, $params);
 sqlsrv_next_result($cur);
+
+echo 'Message of type ' . $msg_type . ' processed<br>';
 
 ?>
